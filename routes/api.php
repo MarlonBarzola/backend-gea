@@ -21,4 +21,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::apiResource('libraries', LibraryController::class);
+Route::get('libraries/search/{name}', [LibraryController::class, 'search'])->name('libraries.search');
 Route::get('categories', [CategoryController::class, 'index'])->name('categories.index');

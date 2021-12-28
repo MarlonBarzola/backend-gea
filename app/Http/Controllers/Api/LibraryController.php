@@ -71,4 +71,15 @@ class LibraryController extends Controller
         $library->delete();
         return response()->noContent();
     }
+
+    public function search($name) {
+
+        return LibraryResource::collection(
+            Library::where('name', 'like', '%' . $name . '%')
+                    ->orderBy('name', 'ASC')
+                    ->get()
+        );
+
+    }
+
 }
