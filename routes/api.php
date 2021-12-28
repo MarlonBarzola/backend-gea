@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\CategoryController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\LibraryController;
+use App\Http\Controllers\Api\RentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,5 +22,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::apiResource('libraries', LibraryController::class);
+
 Route::get('libraries/search/{name}', [LibraryController::class, 'search'])->name('libraries.search');
+Route::post('rents', [RentController::class, 'rentLibrary'])->name('rents.store');
+Route::get('rents/{user}', [RentController::class, 'getUserLibrary'])->name('rents.show');
 Route::get('categories', [CategoryController::class, 'index'])->name('categories.index');
