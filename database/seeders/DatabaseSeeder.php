@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Library;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -15,7 +16,7 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
         $this->call(CategorySeeder::class);
-        $this->call(LibrarySeeder::class);
+        Library::factory(50)->create();
         $this->call(UserSeeder::class);
     }
 }

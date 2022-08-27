@@ -19,7 +19,7 @@ class LibraryController extends Controller
         return LibraryResource::collection(
             Library::orderBy('name', 'ASC')
                     ->orderBy('created_at', 'DESC')
-                    ->get()
+                    ->paginate(10)
         );
     }
 
