@@ -25,7 +25,6 @@ Route::apiResource('libraries', LibraryController::class)->except(['show']);
 //Route::get('libraries/{library}/{included?}', [LibraryController::class, 'show'])->name('libraries.show');
 Route::get('libraries/{library}', [LibraryController::class, 'show'])->name('libraries.show');
 
-Route::get('libraries/search/{name}', [LibraryController::class, 'search'])->name('libraries.search');
 Route::post('rents', [RentController::class, 'rentLibrary'])->name('rents.store');
 Route::get('rents/{user}', [RentController::class, 'getUserLibrary'])->name('rents.show');
 Route::get('categories', [CategoryController::class, 'index'])->name('categories.index');

@@ -16,11 +16,16 @@ class LibraryController extends Controller
      */
     public function index()
     {
-        return LibraryResource::collection(
-            Library::orderBy('id', 'DESC')
-                    //->orderBy('created_at', 'DESC')
-                    ->paginate(10)
-        );
+        $libraries = Library::orderBy('id', 'DESC')
+                    ->paginate(10);
+
+        if(request('search')) {
+            $libraries = Library::where('name', 'like', '%' . request('search') . '%')
+            ->orderBy('name', 'ASC')
+            ->paginate(10);
+        }
+
+        return new LibraryResource($libraries);
     }
 
     /**
@@ -80,19 +85,6 @@ class LibraryController extends Controller
     {
         $library->delete();
         return response()->noContent();
-    }
-
-    public function search($name) {
-        $library = Library::where('name', 'like', '%' . $name . '%')
-        ->orderBy('name', 'ASC')
-        ->get();
-        return response($library, 200);
-        /* return LibraryResource::collection(
-            Library::where('name', 'like', '%' . $name . '%')
-                    ->orderBy('name', 'ASC')
-                    ->get()
-        ); */
-
     }
 
 }
