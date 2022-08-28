@@ -46,9 +46,10 @@ class LibraryController extends Controller
         if(request('included')) {
             $category = request('included');
             if($category == 'category') {
-                $library = Library::with('category')->where('id', $library->id)->first();
+                $library = Library::with('category')->findOrFail($library->id);
             }
         }
+        
         return response($library, 200);
         //return new LibraryResource($library);
     }
