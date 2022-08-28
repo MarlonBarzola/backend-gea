@@ -32,7 +32,8 @@ class LibraryController extends Controller
     public function store(LibraryRequest $request)
     {
         $library = Library::create($request->validated());
-        return new LibraryResource($library);
+        return response($library, 200);
+        //return new LibraryResource($library);
     }
 
     /**
@@ -65,7 +66,8 @@ class LibraryController extends Controller
     {
         $library->update($request->validated());
 
-        return new LibraryResource($library);
+        return response($library, 200);
+        //return new LibraryResource($library);
     }
 
     /**
@@ -81,12 +83,15 @@ class LibraryController extends Controller
     }
 
     public function search($name) {
-
-        return LibraryResource::collection(
+        $library = Library::where('name', 'like', '%' . $name . '%')
+        ->orderBy('name', 'ASC')
+        ->get();
+        return response($library, 200);
+        /* return LibraryResource::collection(
             Library::where('name', 'like', '%' . $name . '%')
                     ->orderBy('name', 'ASC')
                     ->get()
-        );
+        ); */
 
     }
 
