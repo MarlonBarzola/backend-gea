@@ -10,7 +10,9 @@ class CategoryController extends Controller
 {
     
     public function index() {
-        return CategoryResource ::collection(Category::all());
+        $categories = Category::all();
+        return response($categories, 200);
+        //return CategoryResource ::collection(Category::all());
     }
 
 }
