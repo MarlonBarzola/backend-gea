@@ -17,8 +17,8 @@ class LibraryController extends Controller
     public function index()
     {
         return LibraryResource::collection(
-            Library::orderBy('name', 'ASC')
-                    ->orderBy('created_at', 'DESC')
+            Library::orderBy('id', 'DESC')
+                    //->orderBy('created_at', 'DESC')
                     ->paginate(10)
         );
     }
@@ -43,7 +43,14 @@ class LibraryController extends Controller
      */
     public function show(Library $library)
     {
-        return new LibraryResource($library);
+        if(request('included')) {
+            $category = request('included');
+            if($category == 'category') {
+                $library = Library::with('category')->where('id', $library->id)->first();
+            }
+        }
+        return response($library, 200);
+        //return new LibraryResource($library);
     }
 
     /**
